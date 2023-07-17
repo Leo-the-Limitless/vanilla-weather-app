@@ -20,3 +20,32 @@ li {
   font-size: 16px;
   font-weight: 100;
 }
+
+a {
+  text-decoration: none;
+  color: #004ad4;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #003daf;
+}
+
+.temperature img {
+  margin-right: 5px;
+  width: 64px;
+  height: 64px;
+}
+
+.temperature strong {
+  color: #353535;
+  font-weight: 400;
+  line-height: 1;
+  font-size: 64px;
+}
+
+.temperature .units {
+  position: relative;
+  top: 4px;
+  font-size: 15px;
+}
