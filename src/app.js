@@ -1,3 +1,5 @@
+let city = "Yangon";
+
 function formatDate(date) {
   let newDate = new Date(date);
   let hours = newDate.getHours();
@@ -22,38 +24,44 @@ function formatDate(date) {
 
   let day = days[newDate.getDay()];
 
-  return `Updated At: ${day} ${hours}:${minutes}`;
+  return `Local Time: ${day} ${hours}:${minutes}`;
 }
 
 function displayTemp(response) {
-  let tempElement = document.querySelector("#temp");
-  tempElement.innerHTML = Math.round(response.data.main.temp);
+  // console.log(response);
+  if (city === response.data.location.name) {
+    let tempElement = document.querySelector("#temp");
+    tempElement.innerHTML = Math.round(response.data.current.temp_c);
 
-  let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = response.data.name;
+    let cityElement = document.querySelector("#city");
+    cityElement.innerHTML = response.data.location.name;
 
-  let conditionElement = document.querySelector("#condition");
-  conditionElement.innerHTML = response.data.weather[0].description;
+    let conditionElement = document.querySelector("#condition");
+    conditionElement.innerHTML = response.data.current.condition.text;
 
-  let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = response.data.main.humidity;
+    let humidityElement = document.querySelector("#humidity");
+    humidityElement.innerHTML = response.data.current.humidity;
 
-  let windElement = document.querySelector("#wind");
-  windElement.innerHTML = Math.round(response.data.wind.speed);
+    let windElement = document.querySelector("#wind");
+    windElement.innerHTML = Math.round(response.data.current.wind_mph);
 
-  let currentTime = document.querySelector("#currentTime");
-  currentTime.innerHTML = formatDate(response.data.dt * 1000);
+    let currentTime = document.querySelector("#currentTime");
+    currentTime.innerHTML = formatDate(response.data.location.localtime);
+  } else {
+    let errorMsg = document.querySelector("#errorMsg");
+    errorMsg.innerHTML = "City not found";
+  }
 }
 
 function showError(error) {
-  let errorMsg = document.querySelector("#errorMsg");
-  errorMsg.innerHTML = error.response.data.message;
+  if (error.response.status === 400) {
+    let errorMsg = document.querySelector("#errorMsg");
+    errorMsg.innerHTML = "City not found";
+  }
 }
 
-let apiKey = "ad793a6d772939c31783de5822791acf";
+let apiKey = "f93b4360eb1048bfa54113248231807";
 
-let city = "Yangon";
-
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
 
 axios.get(apiUrl).then(displayTemp).catch(showError);
