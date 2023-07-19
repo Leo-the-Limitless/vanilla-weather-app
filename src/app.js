@@ -29,7 +29,7 @@ function formatDate(date) {
 
 function displayTemp(response) {
   // console.log(response);
-  if (city === response.data.location.name) {
+  if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
     let tempElement = document.querySelector("#temp");
     tempElement.innerHTML = Math.round(response.data.current.temp_c);
 
@@ -47,6 +47,10 @@ function displayTemp(response) {
 
     let currentTime = document.querySelector("#currentTime");
     currentTime.innerHTML = formatDate(response.data.location.localtime);
+
+    let icon = document.querySelector("#icon");
+    icon.setAttribute("src", response.data.current.condition.icon);
+    icon.setAttribute("alt", response.data.current.condition.text);
   } else {
     let errorMsg = document.querySelector("#errorMsg");
     errorMsg.innerHTML = "City not found";
