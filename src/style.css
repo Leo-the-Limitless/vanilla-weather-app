@@ -53,3 +53,22 @@ a:hover {
   top: 4px;
   font-size: 15px;
 }
+
+#searchForm {
+  max-width: 500px;
+  margin-bottom: 15px;
+}
+
+.form-control-borderless {
+  border: 1px solid #86B7FE
+}
+
+@media (max-width: 600px) {
+  li {
+    font-size: 14px;
+  }
+
+  #searchForm {
+    max-width: 81vw;
+  }
+}

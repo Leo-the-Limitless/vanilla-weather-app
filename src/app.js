@@ -1,4 +1,5 @@
-let city = "Yangon";
+let city;
+search("Yangon");
 
 function formatDate(date) {
   let newDate = new Date(date);
@@ -27,7 +28,7 @@ function formatDate(date) {
   return `Local Time: ${day} ${hours}:${minutes}`;
 }
 
-function displayTemp(response) {
+function displayData(response) {
   // console.log(response);
   if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
     let tempElement = document.querySelector("#temp");
@@ -52,20 +53,60 @@ function displayTemp(response) {
     icon.setAttribute("src", response.data.current.condition.icon);
     icon.setAttribute("alt", response.data.current.condition.text);
   } else {
-    let errorMsg = document.querySelector("#errorMsg");
-    errorMsg.innerHTML = "City not found";
+    toastr.options = {
+      closeButton: true,
+      debug: false,
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: "toast-top-right",
+      preventDuplicates: true,
+      onclick: null,
+      showDuration: "300",
+      hideDuration: "300",
+      timeOut: "2500",
+      showEasing: "swing",
+      hideEasing: "linear",
+      showMethod: "fadeIn",
+      hideMethod: "fadeOut",
+    };
+    toastr.error("City not found");
   }
 }
 
 function showError(error) {
   if (error.response.status === 400) {
-    let errorMsg = document.querySelector("#errorMsg");
-    errorMsg.innerHTML = "City not found";
+    toastr.options = {
+      closeButton: true,
+      debug: false,
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: "toast-top-right",
+      preventDuplicates: true,
+      onclick: null,
+      showDuration: "300",
+      hideDuration: "300",
+      timeOut: "2500",
+      showEasing: "swing",
+      hideEasing: "linear",
+      showMethod: "fadeIn",
+      hideMethod: "fadeOut",
+    };
+    toastr.error("City not found");
   }
 }
 
-let apiKey = "f93b4360eb1048bfa54113248231807";
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#cityInput");
+  if (cityInput.value !== "") search(cityInput.value);
+}
 
-let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+let searchForm = document.querySelector("#searchForm");
+searchForm.addEventListener("submit", handleSubmit);
 
-axios.get(apiUrl).then(displayTemp).catch(showError);
+function search(searchCity) {
+  city = searchCity;
+  let apiKey = "f93b4360eb1048bfa54113248231807";
+  let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${searchCity}&aqi=no`;
+  axios.get(apiUrl).then(displayData).catch(showError);
+}
