@@ -1,5 +1,4 @@
 let city;
-search("Yangon");
 
 function formatDate(date) {
   let newDate = new Date(date);
@@ -28,9 +27,14 @@ function formatDate(date) {
   return `Local Time: ${day} ${hours}:${minutes}`;
 }
 
+let apiResponse;
+
 function displayData(response) {
   // console.log(response);
   if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
+    apiResponse = response;
+    fahrenheitLink.classList.remove("active");
+    celsiusLink.classList.add("active");
     let tempElement = document.querySelector("#temp");
     tempElement.innerHTML = Math.round(response.data.current.temp_c);
 
@@ -110,3 +114,27 @@ function search(searchCity) {
   let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${searchCity}&aqi=no`;
   axios.get(apiUrl).then(displayData).catch(showError);
 }
+
+function showFahrenheit(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#temp");
+  tempElement.innerHTML = Math.round(apiResponse.data.current.temp_f);
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#temp");
+  tempElement.innerHTML = Math.round(apiResponse.data.current.temp_c);
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+}
+
+let fahrenheitLink = document.querySelector("#to-fahrenheit");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#to-celsius");
+celsiusLink.addEventListener("click", showCelsius);
+
+search("Yangon");

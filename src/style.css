@@ -16,7 +16,7 @@ ul {
 }
 
 li {
-  color: #757575;
+  color: #707070;
   font-size: 16px;
   font-weight: 100;
 }
@@ -27,12 +27,12 @@ li::first-letter {
 
 a {
   text-decoration: none;
-  color: #004ad4;
+  color: #0D6EFD;
 }
 
 a:hover {
   text-decoration: underline;
-  color: #003daf;
+  color: #085ddd;
 }
 
 .temperature img {
@@ -52,6 +52,16 @@ a:hover {
   position: relative;
   top: 4px;
   font-size: 15px;
+}
+
+.temperature .active {
+  color: #5C5C5C;
+  cursor: default;
+  font-weight: bold;
+}
+
+.temperature .active:hover {
+  text-decoration: none;
 }
 
 #searchForm {
