@@ -73,6 +73,29 @@ a:hover {
   border: 1px solid #86B7FE
 }
 
+.forecast {
+  margin-top: 18px;
+  text-align: center;
+  color: black;
+}
+
+.forecast-date {
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.forecast-temp {
+  font-size: 13px;
+}
+
+.forecast-temp-max {
+  opacity: 0.9;
+}
+
+.forecast-temp-min {
+  opacity: 0.6;
+}
+
 @media (max-width: 600px) {
   li {
     font-size: 14px;
