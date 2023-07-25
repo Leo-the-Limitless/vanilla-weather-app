@@ -115,6 +115,25 @@ function search(searchCity) {
   axios.get(apiUrl).then(displayData).catch(showError);
 }
 
+function displayForecast() {
+  let forecastHtml = "";
+  let days = ["Tue", "Wed", "Thu"];
+
+  days.forEach((day) => {
+    forecastHtml =
+      forecastHtml +
+      `<div class="col-2">
+          <div class="forecast-date">${day}</div>
+          <img src="http://cdn.weatherapi.com/weather/64x64/day/116.png" alt="" width="36px">
+          <p class="forecast-temp"><span class="forecast-temp-max">18°</span> <span
+              class="forecast-temp-min">12°</span></p>
+        </div>`;
+  });
+
+  let forecastElement = document.querySelector("#forecast-section");
+  forecastElement.innerHTML = forecastHtml;
+}
+
 function showFahrenheit(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#temp");
@@ -138,3 +157,4 @@ let celsiusLink = document.querySelector("#to-celsius");
 celsiusLink.addEventListener("click", showCelsius);
 
 search("Yangon");
+displayForecast();
