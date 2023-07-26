@@ -1,4 +1,5 @@
 let city;
+let apiKey = "f93b4360eb1048bfa54113248231807";
 
 function formatDate(date) {
   let newDate = new Date(date);
@@ -56,46 +57,37 @@ function displayData(response) {
     let icon = document.querySelector("#icon");
     icon.setAttribute("src", response.data.current.condition.icon);
     icon.setAttribute("alt", response.data.current.condition.text);
+
+    let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
+    axios.get(apiUrl).then(displayForecast);
   } else {
-    toastr.options = {
-      closeButton: true,
-      debug: false,
-      newestOnTop: false,
-      progressBar: false,
-      positionClass: "toast-top-right",
-      preventDuplicates: true,
-      onclick: null,
-      showDuration: "300",
-      hideDuration: "300",
-      timeOut: "2500",
-      showEasing: "swing",
-      hideEasing: "linear",
-      showMethod: "fadeIn",
-      hideMethod: "fadeOut",
-    };
-    toastr.error("City not found");
+    displayError();
   }
+}
+
+function displayError() {
+  toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: false,
+    progressBar: false,
+    positionClass: "toast-top-right",
+    preventDuplicates: true,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "300",
+    timeOut: "2500",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+  };
+  toastr.error("City not found");
 }
 
 function showError(error) {
   if (error.response.status === 400) {
-    toastr.options = {
-      closeButton: true,
-      debug: false,
-      newestOnTop: false,
-      progressBar: false,
-      positionClass: "toast-top-right",
-      preventDuplicates: true,
-      onclick: null,
-      showDuration: "300",
-      hideDuration: "300",
-      timeOut: "2500",
-      showEasing: "swing",
-      hideEasing: "linear",
-      showMethod: "fadeIn",
-      hideMethod: "fadeOut",
-    };
-    toastr.error("City not found");
+    displayError();
   }
 }
 
@@ -110,19 +102,19 @@ searchForm.addEventListener("submit", handleSubmit);
 
 function search(searchCity) {
   city = searchCity;
-  let apiKey = "f93b4360eb1048bfa54113248231807";
   let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${searchCity}&aqi=no`;
   axios.get(apiUrl).then(displayData).catch(showError);
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.forecast.forecastday);
   let forecastHtml = "";
-  let days = ["Tue", "Wed", "Thu"];
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
 
   days.forEach((day) => {
     forecastHtml =
       forecastHtml +
-      `<div class="col-2">
+      `<div class="col-2 forecast-each">
           <div class="forecast-date">${day}</div>
           <img src="http://cdn.weatherapi.com/weather/64x64/day/116.png" alt="" width="36px">
           <p class="forecast-temp"><span class="forecast-temp-max">18°</span> <span
@@ -157,4 +149,3 @@ let celsiusLink = document.querySelector("#to-celsius");
 celsiusLink.addEventListener("click", showCelsius);
 
 search("Yangon");
-displayForecast();

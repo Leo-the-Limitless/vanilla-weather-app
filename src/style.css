@@ -1,12 +1,16 @@
 .weather-card {
   font-family: Arial, Helvetica, sans-serif;
   max-width: 540px;
+  background: linear-gradient(180deg, rgb(0, 26, 49) 0%, rgb(1, 50, 67) 50%, rgb(2, 145, 117) 100%);
+  color: white;
+  box-shadow: 3px -1px 18px 2px rgba(1, 50, 67, 0.3);
+  overflow: clip;
 }
 
 h1 {
-  color: #5c5c5c;
   font-size: 27px;
   line-height: 1.3;
+  opacity: 0.9;
 }
 
 ul {
@@ -16,23 +20,38 @@ ul {
 }
 
 li {
-  color: #707070;
   font-size: 16px;
   font-weight: 100;
+  opacity: 0.8;
 }
 
 li::first-letter {
   text-transform: capitalize;
 }
 
-a {
-  text-decoration: none;
-  color: #0D6EFD;
+/* intro section */
+#weather-image {
+  width: 110px;
+  position: relative;
+  left: 72px;
+  bottom: 18px;
+  transform: rotate(-36deg);
+  opacity: 0.9;
 }
 
-a:hover {
+/* main temperature section */
+.units a {
+  text-decoration: none;
+  color: #ffee57;
+  opacity: 0.6;
+}
+
+.units a:hover {
   text-decoration: underline;
-  color: #085ddd;
+}
+
+#unit-divider {
+  opacity: 0.6;
 }
 
 .temperature img {
@@ -42,46 +61,79 @@ a:hover {
 }
 
 .temperature strong {
-  color: #353535;
   font-weight: 400;
   line-height: 1;
   font-size: 64px;
+  opacity: 0.9;
 }
 
 .temperature .units {
-  position: relative;
-  top: 4px;
   font-size: 15px;
 }
 
 .temperature .active {
-  color: #5C5C5C;
   cursor: default;
   font-weight: bold;
+  opacity: 0.8;
+  color: white;
 }
 
 .temperature .active:hover {
   text-decoration: none;
 }
 
+.current-section {
+  background: #20728921;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* search panel */
 #searchForm {
   max-width: 500px;
   margin-bottom: 15px;
 }
 
-.form-control-borderless {
-  border: 1px solid #86B7FE
+#cityInput {
+  opacity: 0.94;
+  transition: all .3s ease-in-out;
 }
 
+#cityInput:focus {
+  opacity: 0.98;
+}
+
+#search-button {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  opacity: 0.85;
+  transition: all .3s ease-in-out;
+}
+
+#search-button:hover {
+  opacity: 0.9;
+  background: #ffef6a;
+  color: #665f1f;
+  border: 1px solid #ffef6a;
+}
+
+/* forecast section*/
 .forecast {
   margin-top: 18px;
   text-align: center;
-  color: black;
+}
+
+.forecast-each {
+  background: #024a5047;
+  padding: 5px 0;
+  border-radius: 12px;
+  margin: 0 5px;
 }
 
 .forecast-date {
   font-size: 16px;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .forecast-temp {
@@ -90,19 +142,39 @@ a:hover {
 }
 
 .forecast-temp-max {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .forecast-temp-min {
   opacity: 0.6;
 }
 
+/* footer */
+.footer a {
+  color: #001D33;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.footer a:hover {
+  opacity: 1;
+}
+
+/* for different screen sizes */
 @media (max-width: 600px) {
   li {
     font-size: 14px;
   }
 
   #searchForm {
-    max-width: 81vw;
+    max-width: 90vw;
+  }
+
+  .forecast-date {
+    font-size: 14px;
+  }
+
+  .forecast-temp {
+    font-size: 11px;
   }
 }

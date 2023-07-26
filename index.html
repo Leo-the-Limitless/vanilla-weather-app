@@ -21,40 +21,41 @@
 
 <body>
   <div class="container">
-    <div class="card weather-card p-3 m-auto mt-5 shadow">
+    <div class="card weather-card p-3 m-auto mt-5">
       <div class="card-body">
         <form class="row mb-4" id="searchForm">
           <div class="form-control-group d-flex">
             <input class="form-control form-control-borderless me-3" type="search" placeholder="Enter a city..."
               id="cityInput" autocomplete="off">
-            <input class="btn btn btn-outline-primary" type="submit" value="Search"></input>
+            <input class="btn" id="search-button" type="submit" value="Search"></input>
           </div>
         </form>
-        <h1 id="city"></h1>
-        <ul class="mb-3">
-          <li id="currentTime">
-          </li>
-          <li id="condition">
-          </li>
-        </ul>
-        <div class="row">
-          <div class="col-8">
-            <div class="d-flex temperature">
-              <img src="" alt="" id="icon">
-              <strong id="temp"></strong><span class="units"><a href="#" id="to-celsius" class="active">°C</a> | <a
-                  href="#" id="to-fahrenheit">°F</a></span>
-            </div>
-          </div>
-          <div class="col-4">
-            <ul>
-              <li>
-                Humidity: <span id="humidity"></span>%
+        <div class="intro-section d-flex justify-content-between">
+          <div>
+            <h1 id="city"></h1>
+            <ul class="mb-3">
+              <li id="currentTime">
               </li>
-              <li>
-                Wind: <span id="wind"></span> mph
+              <li id="condition">
               </li>
             </ul>
           </div>
+          <img src="images/weather.png" alt="weather-image" id="weather-image">
+        </div>
+        <div class="d-flex temperature justify-content-between">
+          <div class="d-flex current-section">
+            <img src="" alt="" id="icon">
+            <strong id="temp"></strong><span class="units"><a href="#" id="to-celsius" class="active">°C</a> <span
+                id="unit-divider">|</span> <a href="#" id="to-fahrenheit">°F</a></span>
+          </div>
+          <ul>
+            <li>
+              Humidity: <span id="humidity"></span>%
+            </li>
+            <li>
+              Wind: <span id="wind"></span> mph
+            </li>
+          </ul>
         </div>
         <div class="forecast">
           <div class="row" id="forecast-section">
@@ -62,11 +63,12 @@
         </div>
       </div>
     </div>
-    <p class="mt-3 fs-6 font-monospace text-center">
-      <a href="https://github.com/Leo-the-Limitless/vanilla-weather-app" target="_blank">Open-source code</a> by
-      <strong>May Nyein
-        Chan</strong>
-    </p>
+  </div>
+  <p class="mt-3 fs-6 font-monospace text-center footer">
+    <a href="https://github.com/Leo-the-Limitless/vanilla-weather-app" target="_blank">Open-source code</a> by
+    <strong>May Nyein
+      Chan</strong>
+  </p>
   </div>
   <script src="/src/app.js"></script>
 </body>
