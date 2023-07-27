@@ -30,6 +30,20 @@ function formatDate(date) {
 
 let apiResponse;
 
+function displayImage() {
+  let image;
+  let currentTemp = Math.round(apiResponse.data.current.temp_c);
+  if (currentTemp < 15) {
+    image = "cold-temp";
+  } else if (currentTemp > 27) {
+    image = "hot-temp";
+  } else {
+    image = "normal-temp";
+  }
+  let weatherImageElement = document.querySelector("#weather-image");
+  weatherImageElement.innerHTML = `<img src="images/${image}.png" alt="weather-image" id="temp-image">`;
+}
+
 function displayData(response) {
   // console.log(response);
   if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
@@ -57,6 +71,8 @@ function displayData(response) {
     let icon = document.querySelector("#icon");
     icon.setAttribute("src", response.data.current.condition.icon);
     icon.setAttribute("alt", response.data.current.condition.text);
+
+    displayImage();
 
     let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
     axios.get(apiUrl).then(displayForecast);

@@ -30,20 +30,18 @@ li::first-letter {
 }
 
 /* intro section */
-#weather-image {
-  width: 110px;
-  position: relative;
-  left: 72px;
-  bottom: 18px;
-  transform: rotate(-36deg);
+
+#temp-image {
+  width: 72px;
   opacity: 0.9;
+  transform: rotate(18deg);
 }
 
 /* main temperature section */
 .units a {
   text-decoration: none;
   color: #ffee57;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .units a:hover {
@@ -151,13 +149,15 @@ li::first-letter {
 
 /* footer */
 .footer a {
-  color: #001D33;
+  color: #CE384A;
   text-decoration: none;
-  opacity: 0.9;
+  text-shadow: 0px 1px 1px rgb(20 5 7 / 74%);
+  opacity: 0.8;
 }
 
 .footer a:hover {
-  opacity: 1;
+  text-decoration: underline;
+  opacity: 0.9;
 }
 
 /* for different screen sizes */
