@@ -28,6 +28,14 @@ function formatDate(date) {
   return `Local Time: ${day} ${hours}:${minutes}`;
 }
 
+function formatDay(date) {
+  let day = new Date(date);
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let formattedDay = days[day.getDay()];
+  return formattedDay;
+}
+
 let apiResponse;
 
 function displayImage() {
@@ -127,18 +135,21 @@ function search(searchCity) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.forecast.forecastday);
+  let forecast = response.data.forecast.forecastday.slice(0, 5);
   let forecastHtml = "";
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  days.forEach((day) => {
+  forecast.forEach((forecastDay) => {
     forecastHtml =
       forecastHtml +
       `<div class="col-2 forecast-each">
-          <div class="forecast-date">${day}</div>
-          <img src="http://cdn.weatherapi.com/weather/64x64/day/116.png" alt="" width="36px">
-          <p class="forecast-temp"><span class="forecast-temp-max">18°</span> <span
-              class="forecast-temp-min">12°</span></p>
+          <div class="forecast-date">${formatDay(forecastDay.date)}</div>
+          <img src="${forecastDay.day.condition.icon}" alt="" width="36px">
+          <p class="forecast-temp"><span class="forecast-temp-max">${Math.round(
+            forecastDay.day.maxtemp_c
+          )}°</span> <span
+              class="forecast-temp-min">${Math.round(
+                forecastDay.day.mintemp_c
+              )}°</span></p>
         </div>`;
   });
 
