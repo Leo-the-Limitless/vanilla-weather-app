@@ -33,12 +33,16 @@ let apiResponse;
 function displayImage() {
   let image;
   let currentTemp = Math.round(apiResponse.data.current.temp_c);
-  if (currentTemp < 15) {
+  if (currentTemp < 10) {
     image = "cold-temp";
-  } else if (currentTemp > 27) {
+  } else if (currentTemp >= 10 && currentTemp < 20) {
+    image = "normal-temp";
+  } else if (currentTemp >= 20 && currentTemp < 30) {
+    image = "upper-normal-temp";
+  } else if (currentTemp >= 30 && currentTemp < 40) {
     image = "hot-temp";
   } else {
-    image = "normal-temp";
+    image = "extreme-hot-temp";
   }
   let weatherImageElement = document.querySelector("#weather-image");
   weatherImageElement.innerHTML = `<img src="images/${image}.png" alt="weather-image" id="temp-image">`;
