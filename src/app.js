@@ -60,8 +60,6 @@ function displayData(response) {
   // console.log(response);
   if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
     apiResponse = response;
-    fahrenheitLink.classList.remove("active");
-    celsiusLink.classList.add("active");
     let tempElement = document.querySelector("#temp");
     tempElement.innerHTML = Math.round(response.data.current.temp_c);
 
@@ -114,7 +112,7 @@ function displayError() {
 }
 
 function showError(error) {
-  if (error.response.status === 400) {
+  if (error.response.data.error.code === 1006) {
     displayError();
   }
 }
@@ -156,27 +154,5 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast-section");
   forecastElement.innerHTML = forecastHtml;
 }
-
-function showFahrenheit(event) {
-  event.preventDefault();
-  let tempElement = document.querySelector("#temp");
-  tempElement.innerHTML = Math.round(apiResponse.data.current.temp_f);
-  fahrenheitLink.classList.add("active");
-  celsiusLink.classList.remove("active");
-}
-
-function showCelsius(event) {
-  event.preventDefault();
-  let tempElement = document.querySelector("#temp");
-  tempElement.innerHTML = Math.round(apiResponse.data.current.temp_c);
-  fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-}
-
-let fahrenheitLink = document.querySelector("#to-fahrenheit");
-fahrenheitLink.addEventListener("click", showFahrenheit);
-
-let celsiusLink = document.querySelector("#to-celsius");
-celsiusLink.addEventListener("click", showCelsius);
 
 search("Yangon");

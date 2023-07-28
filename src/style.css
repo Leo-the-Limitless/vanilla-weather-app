@@ -38,19 +38,6 @@ li::first-letter {
 }
 
 /* main temperature section */
-.units a {
-  text-decoration: none;
-  color: #ffee57;
-  opacity: 0.7;
-}
-
-.units a:hover {
-  text-decoration: underline;
-}
-
-#unit-divider {
-  opacity: 0.6;
-}
 
 .temperature img {
   margin-right: 5px;
@@ -67,17 +54,7 @@ li::first-letter {
 
 .temperature .units {
   font-size: 15px;
-}
-
-.temperature .active {
-  cursor: default;
-  font-weight: bold;
-  opacity: 0.8;
-  color: white;
-}
-
-.temperature .active:hover {
-  text-decoration: none;
+  opacity: 0.9;
 }
 
 .current-section {
@@ -142,6 +119,7 @@ li::first-letter {
 
 .forecast-temp-max {
   opacity: 0.85;
+  margin-right: 2px;
 }
 
 .forecast-temp-min {
@@ -173,5 +151,11 @@ li::first-letter {
 
   .forecast-temp {
     font-size: 10px;
+  }
+}
+
+@media (max-width: 499px) {
+  .forecast-each {
+    width: 17%;
   }
 }
