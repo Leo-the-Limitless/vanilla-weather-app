@@ -36,12 +36,12 @@ function formatDay(date) {
   return formattedDay;
 }
 
-let apiResponse;
-
 function displayData(response) {
   // console.log(response);
   if (city.toLowerCase() === response.data.location.name.toLowerCase()) {
-    apiResponse = response;
+    let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
+    axios.get(apiUrl).then(displayForecast);
+
     let tempElement = document.querySelector("#temp");
     tempElement.innerHTML = Math.round(response.data.current.temp_c);
 
@@ -63,9 +63,6 @@ function displayData(response) {
     let icon = document.querySelector("#icon");
     icon.setAttribute("src", response.data.current.condition.icon);
     icon.setAttribute("alt", response.data.current.condition.text);
-
-    let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
-    axios.get(apiUrl).then(displayForecast);
   } else {
     displayError();
   }
