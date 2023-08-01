@@ -1,5 +1,8 @@
+body {
+  font-family: cursive;
+}
+
 .weather-card {
-  font-family: Arial, Helvetica, sans-serif;
   max-width: 540px;
   background: linear-gradient(180deg, rgb(0, 26, 49) 0%, rgb(1, 50, 67) 50%, rgb(2, 145, 117) 100%);
   color: white;
@@ -22,7 +25,7 @@ ul {
 li {
   font-size: 16px;
   font-weight: 100;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 li::first-letter {
@@ -30,25 +33,22 @@ li::first-letter {
 }
 
 /* intro section */
+#icon {
+  height: 64px;
+}
 
-#temp-image {
-  width: 72px;
-  opacity: 0.9;
-  transform: rotate(18deg);
+#condition {
+  margin: 0;
+  text-align: center;
+  opacity: 0.7;
 }
 
 /* main temperature section */
 
-.temperature img {
-  margin-right: 5px;
-  width: 64px;
-  height: 64px;
-}
-
 .temperature strong {
   font-weight: 400;
   line-height: 1;
-  font-size: 64px;
+  font-size: 54px;
   opacity: 0.9;
 }
 
@@ -59,8 +59,13 @@ li::first-letter {
 
 .current-section {
   background: #20728921;
-  padding: 10px;
+  padding: 10px 18px;
   border-radius: 12px;
+}
+
+#weather-conditions {
+  position: relative;
+  top: 10px;
 }
 
 /* search panel */
@@ -127,11 +132,15 @@ li::first-letter {
 }
 
 /* footer */
+.footer {
+  opacity: 0.9;
+}
+
 .footer a {
   color: #CE384A;
   text-decoration: none;
   text-shadow: 0px 1px 1px rgb(20 5 7 / 74%);
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .footer a:hover {
